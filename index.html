@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="menuApp">
+<head>
+<!-- 
+
+	The Angular Menu
+
+	Author: Jerry Lin          
+
+-->
+	<title>The Angular Menu</title>
+	
+	<link href="lib/bootstrap.min.css" rel="stylesheet" />
+	<link href="lib/Style.css" rel="stylesheet" />
+	<script src="lib/jquery.min.js" type="text/javascript"></script>
+	<script src="lib/socket.io-1.4.5.js" type="text/javascript"></script>
+	<script src="lib/angular.min.js"></script>
+	<script src="lib/bootstrap.min.js" type="text/javascript"></script>
+	<script src="lib/menu.js" type="text/javascript"></script>
+	<script src="lib/animation.js" type="text/javascript"></script>
+	<script src="lib/TweenMax.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<h1>Coffee shop ordering system</h1>
+	<div ng-controller="MenuListController as menuList">
+		<div ng-repeat="item in menuList.items" class="menuRow selected-{{item.selected}}" ng-click="menuList.addItem($index)">
+			<div class="menuDescription">{{item.text}}</div>
+			<div class="menuPrice">${{item.price}}</div>
+			<div class="menuSize">{{item.size}}</div>
+		</div>
+		
+		
+		<div class="menuOrder menuRowTitle">
+			<button ng-click="menuList.addToOrder()" class="btn btn-primary">Add to Order</button>
+		</div>
+		
+		<hr>
+		<h2>Your orders</h2>
+		<div ng-repeat="orderedItem in menuList.orderedItems track by $index">
+			<div ng-click="menuList.deleteOrder($index)" class="orderRow">
+				<div class="menuDescription">{{orderedItem.text}}</div>
+				<div class="menuPrice">${{orderedItem.price}}</div>
+				<div class="menuSize">{{orderedItem.size}}</div>
+				<div class="menuClick">Click to Delete</div>
+			</div>
+			<form ng-submit="menuList.addComment($index)" class="menuRowTitle" style="width:400px; height:60px" >
+				<input type="text" class="menuCommentInput{{$index}} menuCommentInput" size="30" placeholder="write special requests for this item" onblur="cancelEntry()">
+				<input type="submit" class="btn btn-primary" value="commit">
+			</form>
+			<div class="menuComment{{$index}} menuComment" ng-click="menuList.deleteComment($index)" style="display:none;">
+				<div class="menuDescription">{{orderedItem.comment}}</div>
+				<div class="menuClick">Delete</div>
+			</div>
+		</div>
+		
+		<div class="menuRowTitle">
+			Your order is total of <b>{{menuList.totalCost()}}</b> dollars.
+		</div>	
+		
+		<div class="checkout menuRowTitle">
+			<button ng-click="menuList.checkout()" class="btn btn-primary">Checkout</button>
+		</div>
+	</div>
+</body>
+
+</html>
