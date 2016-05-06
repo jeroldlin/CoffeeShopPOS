@@ -9,6 +9,12 @@ app.get('/', function(req, res){
 
 app.use("/lib", express.static(__dirname + '/lib'));
 
+app.get('/kitchen/', function(req, res){
+  res.sendFile(__dirname + '/kitchen.html');
+});
+
+app.use("/kitchen/lib", express.static(__dirname + '/lib'));
+
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('disconnect', function(){
@@ -32,4 +38,19 @@ io.on('connection', function(socket){
 
 http.listen(process.env.PORT || 3000, function(){
   console.log('listening on *:3000');
+});
+
+
+//for POS
+
+io.on('connection', function(socket){
+  socket.on('new order', function(msg){
+    console.log('message: ' + msg);
+  });
+});
+
+io.on('connection', function(socket){
+  socket.on('new order', function(msg){
+    io.emit('new order', msg);
+  });
 });
