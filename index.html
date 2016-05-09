@@ -27,6 +27,7 @@
 
 <body>
 	<h1>Coffee shop ordering system</h1>
+	<a href="/kitchen/" target="_blank">Please click here to open the kitchen interface</a>
 	<div ng-controller="MenuListController as menuList">
 		<div ng-repeat="item in menuList.items" class="menuRow selected-{{item.selected}}" ng-click="menuList.addItem($index)">
 			<div class="menuDescription">{{item.text}}</div>

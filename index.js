@@ -51,6 +51,6 @@ io.on('connection', function(socket){
 
 io.on('connection', function(socket){
   socket.on('new order', function(msg){
-    io.emit('new order', msg);
+    io.emit('new order to kitchen', msg);
   });
 });

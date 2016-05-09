@@ -28,13 +28,16 @@
 
 <body>
 	<h1>Orders to be made</h1>
+	<div class="top">
+	</div>
 	<div ng-controller="MenuListController as menuList">
-		<div ng-repeat="orderedItem in menuList.orderedItems">
+		<div ng-repeat="orderedItem in menuList.orderedItems track by $index">
 			<div ng-click="menuList.deleteOrder($index)" class="orderRow">
 				<div class="menuDescription">{{orderedItem.text}}</div>
 				<div class="menuSize">{{orderedItem.size}}</div>
-				<div class="menuOrderNumber">Order number:{{orderedItem.orderNumber}}</div>
+				<div class="menuCommentInRow">{{orderedItem.comment}}</div>
 				<div class="menuClick">Click to Delete</div>
+				<div class="menuOrderNumber">Order number:{{orderedItem.orderNumber}}</div>
 			</div>
 		</div>
 	</div>
