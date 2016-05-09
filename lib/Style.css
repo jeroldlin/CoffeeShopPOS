@@ -97,6 +97,10 @@ h2 {
 	float:			left;
 }
 
+#instruction {
+	color:	red;
+}
+
 input[type=checkbox] {
 	/* Double-sized Checkboxes */
 	-ms-transform: scale(2); /* IE */
